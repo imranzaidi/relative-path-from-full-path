@@ -16,11 +16,25 @@ describe('relativePathFromFullPaths()', () => {
         expect(relativePathFromFullPath(source, dest)).toBe('three');
     });
 
-    it('should return "../three"', () => {
+    it('should return "../two/three"', () => {
+        const source = '/one/three';
+        const dest = '/one/two/three';
+
+        expect(relativePathFromFullPath(source, dest)).toBe('../two/three');
+    });
+
+    it('should return ".."', () => {
         const source = '/one/two/three';
         const dest = '/one/two';
 
         expect(relativePathFromFullPath(source, dest)).toBe('..');
+    });
+
+    it('should return "../.."', () => {
+        const source = '/one/two/three/four';
+        const dest = '/one/two';
+
+        expect(relativePathFromFullPath(source, dest)).toBe('../..');
     });
 
     it('should return "../four"', () => {

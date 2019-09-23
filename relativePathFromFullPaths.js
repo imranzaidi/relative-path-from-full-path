@@ -43,8 +43,10 @@ export default function relativePathFromFullPath(source, dest) {
             }
         }
 
+        const goBackPath = Array(sourceDirList.length - diffIndex);
+        goBackPath.fill('..');
         const missingDirs = destDirList.slice(diffIndex);
 
-        return missingDirs.join('/');
+        return goBackPath.concat(missingDirs).join('/');
     }
 }
